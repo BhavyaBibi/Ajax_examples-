@@ -13,8 +13,16 @@
      xhr.send();
      xhr.onreadystatechange= function(){
          
-         if(xhr.readyState == 4){
+        if(xhr.readyState == 4){
              console.log("response received");
+             if(xhr.status ==200)
+             {
+                 alert("sucess")
+             }
+                 else{
+                     alert("error")
+                 }
+             
          }
      } 
     
