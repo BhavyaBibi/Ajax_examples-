@@ -5,20 +5,55 @@
 </head>
 
 <body>
+    <button id="populate">populate data</button>
+    <table>
+        <thead>
+        <tr>
+            <td>ID </td>
+            <td> Name</td>
+            <td> Username</td>
+            <td> Email</td>
+            
+        </tr>
+    </thead>
+<tbody id="result_area">
+    <tr>please wait   </tr>
+ 
+    
+   
+</tbody> 
+</table>
+        
 
 
     <script>
      var xhr= new XMLHttpRequest();
-     xhr.open("get", "https://jsonplaceholder.typicode.com/users")
-     xhr.send();
+     xhr.open("get", "https://jsonplaceholder.typicode.com/users");
+    
+     document.getElementById("populate").addEventListener("click",function(){
+        xhr.send();
+
+     });
      xhr.onreadystatechange= function(){
          
         if(xhr.readyState == 4){
-             console.log("response received");
+           
              if(xhr.status ==200)
              {
-                 alert("sucess")
-             }
+                 //alert("sucess message")
+                 //alert(xhr.responseText)
+                var result_data =JSON.parse(xhr.responseText);
+                var html_content = "";
+                for(i=0; i<result_data.length; ++i){
+                    var current_record = result_data[i];
+                    html_content = html_content+"<tr> <td>"+current_record.ID+"</td <td>"+current_record.Name+" </td> <td>"+current_record.Username+" </td> <td>"+current_record.Email+" </td> </tr>"
+                        
+                        
+
+
+                }
+                document.getElementById("result_area").innerHTML = html_content;
+                }
                  else{
                      alert("error")
                  }
